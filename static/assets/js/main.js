@@ -375,9 +375,9 @@ customElements.define('type-async', TypeAsync, { extends: 'span' })
 init()
 
  /**
-   * Testimonials slider
+   * solutions slider
    */
-  new Swiper('.testimonials-slider', {
+  new Swiper('.solutions-slider', {
     speed: 600,
     loop: true,
     autoplay: {
@@ -401,3 +401,13 @@ init()
       }
     }
   });
+
+
+  // witrack js code 
+
+  $(function() {
+    const $gallery = $('.gallery a').simpleLightbox();
+  });
+
+
+  // end of witrack js code

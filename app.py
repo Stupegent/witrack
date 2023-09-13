@@ -65,3 +65,13 @@ if __name__ == "__main__":
     app.run(host='192.168.157.1',debug=True)
 
 
+@app.route("/witrack/")
+def witrack():
+    return render_template("witrackPlatform.html")
+
+
+
+
+@app.route("/smsdz/")
+def smsDz():
+    return render_template("smsDz.html")
