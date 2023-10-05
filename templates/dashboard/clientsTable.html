@@ -1,0 +1,81 @@
+{% extends 'dashboard/indexDashboard.html'%}
+{% block content %}
+  <main id="main" class="main">
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Clients Table</h5>
+
+              <!-- Default Table -->
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                {% for client in clients %}
+                  <tr>
+                    <th scope="row"><img src="{{client.logo_url}}" width="36px" height="36px"> </th>
+                    <td>{{client.name}}</td>
+                    <td>{{client.description}}</td>
+
+                  </tr>
+                {% endfor %}
+                  
+                </tbody>
+              </table>
+              <!-- End Default Table Example -->
+            </div>
+          </div>
+
+
+
+        </div>
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Team Table</h5>
+
+              <!-- Default Table -->
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Position</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                {% for t in team %}
+                  <tr>
+                    <th scope="row"><img src="{{url_for('static',filename= 'assets/img/team/'+t.photo_url) }}" width="36px" height="36px"> </th>
+                    <td>{{t.name}}</td>
+                    <td>{{t.position}}</td>
+                  </tr>
+                {% endfor %}
+                  
+                </tbody>
+              </table>
+              <!-- End Default Table Example -->
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+{% endblock %}

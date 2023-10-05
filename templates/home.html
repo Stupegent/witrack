@@ -1,0 +1,489 @@
+{% extends 'index.html' %}
+{% block content %}  
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+          <h1>WITRACK est Votre Partenaire IT</h1>
+          <h2>nous trouvons pour vous la solution smart qui vous convient</h2>
+          <div class="d-flex justify-content-center justify-content-lg-start">
+            <a href="#about" class="btn-get-started scrollto">Get Started</a>
+            <a href="https://www.youtube.com/watch?v=PE63WWfUqkU" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+          <!-- <div class="cnter">
+            <div class="loader">
+              <div class="circle circle-1"></div>
+              <div class="circle circle-2"></div>
+              <div class="circle circle-3"></div>
+              <div class="circle circle-4"></div>
+              <div class="circle circle-5"></div>
+              <div class="circle circle-6"></div>
+            </div>
+          </div>
+          <div class="cntnr">
+            <span is="type-async" id="type-text">...</span>
+            <span class="blinking-cursor">_</span>
+          </div> -->
+          
+
+          
+          <img src={{ url_for('static', filename="assets/img/hero-img.svg" )}} class="img-fluid animated" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= Clients Section ======= -->
+    <section id="clients" class="clients section-bg">
+      <div class="container">
+
+        <div class="row" data-aos="zoom-in">
+            <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+              <img src={{ url_for('static', filename="assets/img/clients/client-1.svg" )}} class="img-fluid" alt="">
+            </div>
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src={{ url_for('static', filename="assets/img/clients/client-2.svg" )}} class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src={{ url_for('static', filename="assets/img/clients/client-3.jpg" )}} class="img-fluid" alt="ems" width="300" height="300">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src={{ url_for('static', filename="assets/img/clients/client-4.png" )}} class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src={{ url_for('static', filename="assets/img/clients/client-5.png" )}} class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src={{ url_for('static', filename="assets/img/clients/client-6.jpg" )}} class="img-fluid" alt="">
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Cliens Section -->
+
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>QUI SOMME NOUS</h2>
+        </div>
+
+        <div class="row content">
+          <div class="col-lg-6">
+            <p>
+              NETFER SMART SOLUTIONS est une entreprise spécialisée dans le développement mobile et web et des Solutions Digitales. 
+            </p>
+            <p>
+              Notre département de développement vous aidera à digitaliser vos processus métiers, vous gagnerez en temps, vous serez efficient et vous réduisez vos coûts.
+            </p>
+            <ul>
+              <li><i class="ri-check-double-line"></i> vous gagnerez en temps.</li>
+              <li><i class="ri-check-double-line"></i> vous serez efficient.</li>
+              <li><i class="ri-check-double-line"></i> vous réduisez vos coûts.</li>
+            </ul>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0">
+            <p>
+                Nous mettons à votre disposition notre savoir faire acquis durant un parcours très riche dans les TICs,
+                et traduit par des services et solutions entreprises et grand public dans le but de résoudre des
+                problématiques réelles avec une expérience utilisateur la plus simple.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Us Section -->
+
+        <!-- ======= Portfolio Section ======= -->
+    <!-- ======= solutions Section ======= -->
+    <section id="solutions" class="solutions">
+
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Nos Solutions</h2>
+          <p>
+            En appliquant des principes de conception modernes, associés aux technologies de pointe en matière de web,de mobile et de bureau, Nous créons des solutions sur mesure qui  simplifient et accélèrent les processus métier tout en réduisant les coûts.
+          </p>
+        </div>
+
+        <div class="solutions-slider swiper" data-aos="fade-up" data-aos-delay="200">
+          <div class="swiper-wrapper">
+
+            
+            
+
+            <div class="swiper-slide">
+              <a href="/">
+              <div class="solution-item">
+                
+                <p>
+                  SMS Banking, SMS Marketing, Notification de RDV, One Time Password, Confirmation de Vol …Numéro Courts SMS, APIs HTTPS, Bulk SMS, Interface Web pour envoi de Campagnes Marketing, Rapport d’envoi et de livraison, Envoi programmé                </p>
+                <div class="profile mt-auto">
+                  <img src={{ url_for('static', filename = "assets/img/smsProLogo.svg" )}} class="solution-img" alt="">
+                  <h3>SMS PROFESSIONNEL</h3>
+                  <h4>Web App</h4>
+                </div>
+              </div>
+            </a>
+            </div><!-- End solution item -->
+
+            
+              <div class="swiper-slide">
+                
+                  <div class="solution-item">
+                    
+                    <p>
+                      
+                      Gérez les tâches de vos équipes sur terrain, Interface Web d’attribution et suivi des tâches, Application mobile pour les agents et ingénieurs sur terrain
+                    </p>
+                    <div class="profile mt-auto">
+                      <a href="{{url_for('witrack') }}">
+                      
+                      <img src= {{ url_for('static', filename = "assets/img/greenLogo.png" )}} class="solution-img" alt="">
+                      
+                      <h3>WITRACK </h3>
+                      
+                      <h4>Web et Mobile App</h4>
+                      </a>
+                    </div>
+                    
+                  </div>
+              </div><!-- End solution item -->
+            
+
+            <div class="swiper-slide">
+              <div class="solution-item">
+                
+                <p>
+                  Gérez les tâches de vos équipes sur terrain, Interface Web d’attribution et suivi des tâches, Application mobile pour les agents et ingénieurs sur terrain
+                </p>
+
+                <div class="profile mt-auto">
+                  <img src={{ url_for('static', filename = "assets/img/smartLogo.svg" )}} class="solution-img" alt="">
+                  <h3>SMART EXHIBITION MANAGEMENT</h3>
+                  <h4>Web and Desktop App</h4>
+                </div>
+              </div>
+            </div><!-- End solution item -->
+
+
+
+            <div class="swiper-slide">
+              <div class="solution-item">
+                
+                <p>
+                    Boostez vos ventes avec une Application Mobile E-Commerce Application Android et IOS, Interface avec différents CMS, Design et charte graphique adaptés                
+                </p>
+
+                <div class="profile mt-auto">
+                  <img src={{ url_for('static', filename = "assets/img/mobileLogo.svg" )}} class="solution-img" alt="">
+                  <h3>                    SITE WEB ET APPLICATIONS MOBILES                  </h3>
+                  <h4>Web and Desktop App</h4>
+                </div>
+              </div>
+            </div><!-- End solution item -->
+
+            
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+
+    </section><!-- End solutions Section -->
+
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Services</h2>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="">Solutions Pour Entreprise</a></h4>
+              <p>Favoriser l’agilité et l’efficacité des entreprises avec des solutions Web et mobiles.</p>
+            </div>
+          </div>
+
+          <div class="col-xl-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-file"></i></div>
+              <h4><a href="">Développement Mobile</a></h4>
+              <p>
+                Applications et stratégies mobiles robustes pour engager vos clients et votre personnel.</p>
+            </div>
+          </div>
+
+          <div class="col-xl-4 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-tachometer"></i></div>
+              <h4><a href="">Développement Web</a></h4>
+              <p>
+                Enrichir les fonctionnalités de l’entreprise avec des applications Web personnalisées.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <br>
+
+        <div class="row">
+          <div class="col-xl-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="">Conseil en Technologie d'Entreprise</a></h4>
+              <p>
+                Développement de stratégies informatique et services de conseil pour améliorer la productivité des entreprises.</p>
+            </div>
+          </div>
+
+          <div class="col-xl-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-file"></i></div>
+              <h4><a href="">Analyse et Visualisation de Données</a></h4>
+              <p>
+                on proposent De nouvelles approches signifient que cela n’a pas à être compliqué ni coûteux.</p>
+            </div>
+          </div>
+
+          <div class="col-xl-4 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-tachometer"></i></div>
+              <h4><a href="">Externalisation des Ressources Humaines</a></h4>
+              <p>
+                Se concentrer sur le cœur du métier, réduire les coûts du service RH , avoir accès à de nouvelles compétences.</p>
+            </div>
+          </div>
+
+          
+          
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+    <!-- ======= Cta Section ======= -->
+    <section id="cta" class="cta">
+      <div class="container" data-aos="zoom-in">
+
+        <div class="row">
+          <div class="col-lg-9 text-center text-lg-start">
+            <h3>Call To Action</h3>
+            <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div class="col-lg-3 cta-btn-container text-center">
+            <a class="cta-btn align-middle" href="#">Call To Action</a>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Cta Section -->
+
+
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Team</h2>
+        </div>
+
+        <div class="row">
+
+          {% for teammem in teammems %}
+            <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
+              <div class="member d-flex align-items-start">
+                <div class="pic"><img src="{{url_for('static',filename= 'assets/img/team/'+teammem.photo_url) }}" class="img-fluid" alt=""></div>
+                <div class="member-info">
+                  <h4>{{teammem.name}}</h4>
+                  <span>{{teammem.position }}</span>
+                  <p>{{teammem.bio}}</p>
+                  <div class="social">
+                    <a href=""><i class="ri-twitter-fill"></i></a>
+                    <a href=""><i class="ri-facebook-fill"></i></a>
+                    <a href=""><i class="ri-instagram-fill"></i></a>
+                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+          
+
+        </div>
+
+      </div>
+    </section><!-- End Team Section -->
+
+
+
+    <!-- ======= Frequently Asked Questions Section ======= -->
+    <section id="faq" class="faq section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Questions / Reponses</h2>
+        </div>
+
+        <div class="faq-list">
+          <ul>
+            <li data-aos="fade-up" data-aos-delay="100">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">C'est quoi WITRACK? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
+                <p>
+                  est une entreprise spécialisée dans le développement mobile et web et des Solutions Digitales.                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="200">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">est-ce-que je peut utiliser sms Professionnel? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  Oui, bien sur.   
+                </p>
+              </div>
+            </li>
+
+
+          </ul>
+        </div>
+
+      </div>
+
+    </section><!-- End Frequently Asked Questions Section -->
+
+
+ 
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Contact</h2>
+          <p>COMMENÇONS ENSEMBLE QUELQUE CHOSE DE NOUVEAU DITES BONJOUR!</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-5 d-flex align-items-stretch">
+            <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Lieu   :</h4>
+                <p> Cyber parc sidi abdellah rahmania, Alger.</p>
+              </div>
+
+              <div class="email">
+                <a href="mailto:contact@netfersmartsolutions.dz"  >
+                  <i class="bi bi-envelope"></i>
+                  <h4>Email :</h4>
+                  
+                  <p>contact@netfersmartsolutions.dz</p>
+                </a>
+              </div>
+
+              <div class="phone">
+                <a  href="tel:+213-771-006-184" >
+                  <i class="bi bi-phone"></i>
+                  <h4>Tél   :</h4>
+                  <p> 0780091018</p>
+                </a>
+              </div>
+
+              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d102402.04562108825!2d2.899523!3d36.672964!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128fa5cbbd57a7df%3A0x79bd936fdf3bf843!2sCyberparc%20of%20Sidi%20Abdellah!5e0!3m2!1sfr!2sus!4v1692785507125!5m2!1sfr!2sus"  frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+            </div>
+
+          </div>
+
+          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+            <form action="/" method="post"  class="info" enctype="multipart/form-data">
+              {{ form.hidden_tag() }}
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="name">Votre Nom</label>
+                      {% if form.name.errors %}
+                          {{ form.name(class="form-control is-invalid" ) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.name.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                          {{ form.name(class="form-control") }}
+                        {% endif %}
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Votre Email</label>
+                        {% if form.email.errors %}
+                          {{ form.email(class="form-control is-invalid" ) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                          {{ form.email(class="form-control") }}
+                        {% endif %}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name">Sujet</label>
+                        {% if form.subject.errors %}
+                          {{ form.subject(class="form-control is-invalid" ) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.subject.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                          {{ form.subject(class="form-control") }}
+                        {% endif %}
+              </div>
+              <div class="form-group">
+                <label for="name">Message</label>
+                    {% if form.message.errors %}
+                          {{ form.message(class="form-control is-invalid",rows=10 ) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.message.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                          {{ form.message(class="form-control",rows=10) }}
+                        {% endif %}
+              </div>
+              
+              <div class="text-center"><button type="submit" name="submit">Send Message</button></div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+{% endblock %}
