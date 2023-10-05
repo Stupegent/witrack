@@ -15,7 +15,7 @@
         <h1>Form Layouts</h1>
         <nav>
             <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="">Home</a></li>
             <li class="breadcrumb-item">Forms</li>
             <li class="breadcrumb-item active">Layouts</li>
             </ol>
@@ -47,6 +47,21 @@
                         {% endif %}
                     </div>
                     </div>
+                    <div class="row mb-3">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            {% if form.email.errors %}
+                              {{ form.email(class="form-control is-invalid" ) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                              {{ form.email(class="form-control") }}
+                            {% endif %}
+                        </div>
+                        </div>
                     <div class="row mb-3">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Description</label>
                     <div class="col-sm-10">
@@ -156,75 +171,121 @@
 
             </div>
 
-            <!-- <div class="col-lg-6">
+            <div class="col-lg-6">
 
             <div class="card">
                 <div class="card-body">
-                <h5 class="card-title">Vertical Form</h5>
+                <h5 class="card-title">Solutions Form</h5>
 
-                <form class="row g-3">
+                <form class="row g-3" action="{{url_for('solution')}}" method="POST" enctype="multipart/form-data">
+                    {{ formSolution.hidden_tag() }}
                     <div class="col-12">
-                    <label for="inputNanme4" class="form-label">Your Name</label>
-                    <input type="text" class="form-control" id="inputNanme4">
+                    <label for="inputNanme4" class="form-label"> Name</label>
+                        {% if formSolution.name.errors %}
+                          {{ formSolution.name(class="form-control is-invalid" ) }}
+                        <div class="invalid-feedback">
+                            {% for error in formSolution.name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                          {{ formSolution.name(class="form-control") }}
+                        {% endif %}
                     </div>
                     <div class="col-12">
-                    <label for="inputEmail4" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="inputEmail4">
+                        <label for="inputPassword4" class="form-label">Label</label>
+                        {% if formSolution.label.errors %}
+                              {{ formSolution.label(class="form-control is-invalid" ) }}
+                            <div class="invalid-feedback">
+                                {% for error in formSolution.label.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                              {{ formSolution.label(class="form-control") }}
+                            {% endif %}
                     </div>
                     <div class="col-12">
-                    <label for="inputPassword4" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="inputPassword4">
+                    <label for="inputEmail4" class="form-label">Description</label>
+                    {% if formSolution.description.errors %}
+                          {{ formSolution.description(class="form-control is-invalid" ) }}
+                        <div class="invalid-feedback">
+                            {% for error in formSolution.description.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                          {{ formSolution.description(class="form-control") }}
+                        {% endif %}
                     </div>
+                    
                     <div class="col-12">
-                    <label for="inputAddress" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                    <label for="inputAddress" class="form-label">Photo</label>
+                    {% if formSolution.photo.errors %}
+                          {{ formSolution.photo(class="form-control is-invalid" ) }}
+                        <div class="invalid-feedback">
+                            {% for error in formSolution.photo.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                          {{ formSolution.photo(class="form-control") }}
+                        {% endif %}
                     </div>
                     <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="reset" class="btn btn-secondary">Reset</button>
+                        {{formSolution.submit(class="btn btn-primary btn-lg", type="submit" ,value="submit")}}
                     </div>
                 </form>
 
                 </div>
-            </div> -->
+            </div>
 
-            <!-- <div class="card">
+            <div class="card">
                 <div class="card-body">
-                <h5 class="card-title">No Labels / Placeholders as labels Form</h5>
+                <h5 class="card-title">Questions and Answers</h5>
 
-                <form class="row g-3">
+                <form class="row g-3"action="{{url_for('qa')}}" method="POST" enctype="multipart/form-data">
+                    {{ formQA.hidden_tag() }}
                     <div class="col-md-12">
-                    <input type="text" class="form-control" placeholder="Your Name">
+                    <label for="inputAddress" class="form-label">Question</label>
+                    {% if formQA.question.errors %}
+                          {{ formQA.question(class="form-control is-invalid" ) }}
+                        <div class="invalid-feedback">
+                            {% for error in formQA.question.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                          {{ formQA.question(class="form-control") }}
+                    {% endif %}
                     </div>
-                    <div class="col-md-6">
-                    <input type="email" class="form-control" placeholder="Email">
+                    <div class="col-md-12">
+                        <label for="inputAddress" class="form-label">Answer</label>
+                        {% if formQA.answer.errors %}
+                          {{ formQA.answer(class="form-control is-invalid" ) }}
+                        <div class="invalid-feedback">
+                            {% for error in formQA.answer.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                          {{ formQA.answer(class="form-control") }}
+                    {% endif %}
                     </div>
-                    <div class="col-md-6">
-                    <input type="password" class="form-control" placeholder="Password">
-                    </div>
-                    <div class="col-12">
-                    <input type="text" class="form-control" placeholder="Address">
-                    </div>
-                    <div class="col-md-6">
-                    <input type="text" class="form-control" placeholder="City">
-                    </div>
-                    <div class="col-md-4">
-                    <select id="inputState" class="form-select">
+                    
+                    <!-- <select id="inputState" class="form-select">
                         <option selected>Choose...</option>
                         <option>...</option>
-                    </select>
+                    </select> -->
                     </div>
-                    <div class="col-md-2">
-                    <input type="text" class="form-control" placeholder="Zip">
-                    </div>
+                    
                     <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="reset" class="btn btn-secondary">Reset</button>
+                        {{formQA.submit(class="btn btn-primary btn-lg", type="submit" ,value="submit")}}
                     </div>
                 </form>
 
                 </div>
-            </div> -->
+            </div>
 
             <!-- <div class="card">
                 <div class="card-body">

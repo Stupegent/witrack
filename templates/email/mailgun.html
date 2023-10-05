@@ -1,0 +1,113 @@
+{% extends 'dashboard/indexDashboard.html'%}
+{% block content %}
+
+<main id="main" class="main">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                    {{ message }}
+                    </div>
+                {% endfor %}
+                {% endif %}
+    {% endwith %}
+    <div class="pagetitle">
+    <h1>Form Layouts</h1>
+    <nav>
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="">Home</a></li>
+        <li class="breadcrumb-item">Forms</li>
+        <li class="breadcrumb-item active">Layouts</li>
+        </ol>
+    </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+    <div class="row">
+        <div class="col-lg-6">
+
+        <div class="card">
+            <div class="card-body">
+            <h5 class="card-title">Clients Form</h5>
+
+            <!-- Horizontal Form -->
+            <form action="" method="POST" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Subject</label>
+                <div class="col-sm-10">
+                    {% if form.subject.errors %}
+                      {{ form.subject(class="form-control is-invalid" ) }}
+                    <div class="invalid-feedback">
+                        {% for error in form.subject.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                      {{ form.subject(class="form-control") }}
+                    {% endif %}
+                </div>
+                </div>
+                <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Description</label>
+                <div class="col-sm-10">
+                    {% if form.message.errors %}
+                      {{ form.message(class="form-control is-invalid" ) }}
+                        <div class="invalid-feedback">
+                            {% for error in form.message.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                      {{ form.message(class="form-control") }}
+                    {% endif %}
+                </div>
+                </div>
+                <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-2 col-form-label">Photo</label>
+                <div class="col-sm-10">
+                    {% if form.photo.errors %}
+                      {{ form.photo(class="form-control is-invalid" ) }}
+                        <div class="invalid-feedback">
+                            {% for error in form.photo.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                      {{ form.photo(class="form-control",type="file") }}
+                    {% endif %}
+                </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Photo</label>
+                    <div class="col-sm-10">
+                        {% if form.receipient.errors %}
+                          {{ form.receipient(class="form-control is-invalid" ) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.receipient.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                          {{ form.receipient(class="form-control") }}
+                        {% endif %}
+                    </div>
+                </div>
+
+                
+                <div class="text-center">
+                    {{form.submit(class="btn btn-primary btn-lg", type="submit" ,value="Submit")}}
+                </div>
+            </form><!-- End Horizontal Form -->
+
+            </div>
+        </div>
+
+
+
+        </div>
+    </div>
+    </section>
+
+</main><!-- End #main -->
+
+{% endblock %}

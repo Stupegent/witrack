@@ -1,27 +1,36 @@
 from flask import Flask,render_template,flash,url_for,redirect,request
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField,TextAreaField,FileField,EmailField
-from flask_wtf.file import  FileAllowed
-from wtforms.validators import InputRequired, Length,DataRequired,Email
+from flask_login import UserMixin,LoginManager, login_user, login_required, logout_user, current_user
+from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from forms import *
+from datetime import datetime
+
+
 
 app = Flask(__name__)
-
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676df8o#5(z^p@kjakwtw-'
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///netfer.db'
-
 db = SQLAlchemy(app)
+migrate = Migrate(app,db)
+
 
 login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.init_app(app)
+
+
+
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
 
 
 class User(UserMixin, db.Model):
@@ -35,6 +44,7 @@ class Client(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=True)
+    email = db.Column(db.String(255), nullable=False)
     logo_url = db.Column(db.String(200), nullable=True)
 
 
@@ -47,7 +57,11 @@ class Service(db.Model):
 class Solution(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
+    label = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=True)
+    logo_url = db.Column(db.String(200), nullable=True)
+
+
 
 class TeamMember(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -72,36 +86,6 @@ class Contact(db.Model):
 
 
 
-class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[InputRequired(), Length(min=4, max=80)])
-    password = PasswordField('Password', validators=[InputRequired(), Length(min=6, max=120)])
-    submit = SubmitField('Login')
-
-
-class ClientForm(FlaskForm):
-    label = "client"
-    name = StringField('Name', validators=[DataRequired()])
-    description = TextAreaField('Description')
-    photo = FileField('photo',validators=[DataRequired(),FileAllowed(['jpg','png','svg','jpeg','gif'], "wrong format!")])
-    submit = SubmitField('Submit')
-
-
-class TeamMemberForm(FlaskForm):
-    label = "team"
-    name = StringField('Name', validators=[DataRequired()])
-    position = StringField('Position')
-    bio = TextAreaField('Bio')
-    photo = FileField('photo',validators=[DataRequired(),FileAllowed(['jpg','png','svg','jpeg','gif'], "wrong format!")])
-    submit = SubmitField('Add Team Member')
-
-
-class ContactForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
-    email = EmailField('Email', validators=[DataRequired()])
-    subject  = StringField('Subject' , validators=[DataRequired()])
-    message = TextAreaField('Message', validators=[DataRequired()])
-    submit = SubmitField('Send Message')
-
 
 
 @app.route("/",methods = ['GET','POST'])
@@ -115,9 +99,8 @@ def Home():
         message = form.message.data
         contact = Contact(name=name,email=email,subject=subject,message=message)
         send_email(subject=subject,email=email,message=message)
-        print("hello123")
         
-    return render_template('home.html',teammems = teammems,form=form)
+    return render_template('home.html',teammems = teammems,form=form,current_user=current_user)
 
 
 
@@ -134,12 +117,6 @@ def witrack():
 def smsDz():
     return render_template("smsDz.html")
 
-
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
 
 
 
@@ -190,22 +167,89 @@ def dashboard():
     # Create new client
     form = ClientForm()
     form2 = TeamMemberForm()
+    formSolution = SolutionForm()
+    formQA = QAForm()
     
-    if form.validate_on_submit():
+
+    print(form.validate_on_submit(),formSolution.validate_on_submit())
+    print("this is :",form.submit.data,formSolution.submit.data)
+    if  form.validate_on_submit():
         name = form.name.data
+        email = form.email.data
         description = form.description.data
         filename = save_picture(form.photo.data,form.name.data,folder = "clients")
         logo_url = filename
-        
-        new_client = Client(name=name, description=description, logo_url=logo_url)
+        new_client = Client(name=name, description=description,email=email, logo_url=logo_url)
         db.session.add(new_client)
         db.session.commit()
         flash('Client created successfully', 'success')
         return redirect(url_for('smsDz'))
     
 
-    return render_template('dashboard/formsDashboard.html',form=form,form2=form2 )
+    
 
+    return render_template('dashboard/formsDashboard.html',form=form,form2=form2,formSolution=formSolution,formQA=formQA )
+
+
+
+@app.route('/mailGun/', methods = ["GET","POST"])
+@login_required
+def mailGun():
+    # Create new client
+    form = MailGunForm()
+    if form.validate_on_submit():
+        if form.receipient.data == 'team':
+            teamEmail = db.session.query(TeamMember.email).all()
+            emailList = [item for tup in teamEmail for item in tup]
+            send_html_email(emailList,form.subject.data,form.message.data)
+            return redirect(url_for('Home'))
+        elif form.receipient.data == 'client': 
+            clientsEmail = db.session.query(Client.email).all()
+            emailList = [item for tup in clientsEmail for item in tup]
+            send_html_email(emailList,form.subject.data,form.message.data)
+            return redirect(url_for('Home'))
+
+
+        
+
+    print(form.subject.data , form.message.data, form.photo.data , form.receipient.data)
+    return render_template("email/mailgun.html",form=form)
+
+@app.route('/solution/', methods = ["POST"])
+@login_required
+def solution():
+    formSolution = SolutionForm()
+    if formSolution.validate_on_submit():
+        name = formSolution.name.data
+        label = formSolution.label.data
+        description = formSolution.description.data
+        filename = save_picture(formSolution.photo.data,formSolution.name.data,folder = "solutions")
+        logo_url = filename
+        new_solution = Solution(name=name, label=label,description=description, logo_url=logo_url)
+        db.session.add(new_solution)
+        db.session.commit()
+        flash('Solution created successfully', 'success')
+        return redirect(url_for('smsDz'))
+    else:
+        flash('an error has occured', 'danger')
+        return redirect(url_for('smsDz'))
+
+
+@app.route('/qa/', methods = ["POST"])
+@login_required
+def qa():
+    form = QAForm()
+    if form.validate_on_submit():
+        question = form.question.data
+        answer = form.answer.data
+        new_qa = Question(question=question, answer=answer)
+        db.session.add(new_qa)
+        db.session.commit()
+        flash('Q&A created successfully', 'success')
+        return redirect(url_for('smsDz'))
+    else:
+        flash('an error has occured', 'danger')
+        return redirect(url_for('smsDz'))
 
 @app.route('/profile/', methods = ["GET","POST"])
 @login_required
@@ -218,7 +262,10 @@ def profile():
 def clienttab():
     clients  = Client.query.all()
     team = TeamMember.query.all()
-    return render_template('dashboard/clientsTable.html',clients = clients,team = team)
+    solutions = Solution.query.all()
+    QandA = Question.query.all()
+    contacts = Contact.query.all()
+    return render_template('dashboard/clientsTable.html',clients = clients,team = team,solutions= solutions,QandA=QandA,contacts=contacts)
 
 
 
@@ -229,6 +276,7 @@ GMAIL_PASSWORD = 'LMK!@#$5'
 
 @app.route('/email')
 def emails():
+    # send_html_email()
     return render_template('email/email.html')
 
 @app.route('/send_emails', methods=['POST'])
@@ -236,7 +284,6 @@ def send_emails():
     recipient_list = request.form.get('recipient_list').split(',')
     subject = request.form.get('subject')
     message = request.form.get('message')
-
     try:
         smtp_server = smtplib.SMTP('smtp.gmail.com', 587)
         smtp_server.starttls()
@@ -276,14 +323,19 @@ import os
 
 
 def save_picture(picture , name , folder):
-
+    import cairosvg
     _, f_ext = os.path.splitext(picture.filename)
     picture_fn = name +str(randint(1,50)) + f_ext
     path = 'static/assets/img/' + folder
     picture_path = os.path.join(app.root_path,path,picture_fn)
+    if f_ext =='.svg':
+        converted_svg = cairosvg.svg2svg(bytestring=picture.read())
+        # Save the converted SVG to a file
+        with open(picture_path, 'wb') as svg_file:
+            svg_file.write(converted_svg)
+        return picture_fn
     i = Image.open(picture)
     i.save(picture_path)
-
     return picture_fn
 
 
@@ -315,6 +367,33 @@ def send_email(subject,email, message):
         email: {email}:
         {message}
         """
+        msg.attach(MIMEText(email_content, 'html'))
+        smtp_server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+        smtp_server.starttls()  # Use TLS encryption
+        smtp_server.login(sender_email, sender_password)
+        smtp_server.sendmail(sender_email, recipient_email, msg.as_string())
+        smtp_server.quit()
+        return "Email sent successfully!"
+    except Exception as e:
+        return str(e)
+
+def send_html_email(receipient,subject,message):
+    try:
+        sender_email = "achourbensouna100@gmail.com"
+        sender_password = "pkvf fsml fvsb mvpj"
+        recipient_email = receipient
+        # Create the email message
+        msg = MIMEMultipart()
+        msg['From'] = sender_email
+        msg['To'] = ', '.join(recipient_email)
+        a= ', '.join(recipient_email)
+        print(type(a)," :::::::::: " ,a)
+        msg['Subject'] = subject
+        SMTP_SERVER = "smtp.gmail.com"
+        SMTP_PORT = 587
+        # with open('templates/email/email.html', 'r') as template_file:
+        #     email_content = template_file.read()
+        email_content= render_template("email/email.html",message=message)
         msg.attach(MIMEText(email_content, 'html'))
         smtp_server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
         smtp_server.starttls()  # Use TLS encryption

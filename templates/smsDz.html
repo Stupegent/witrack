@@ -82,13 +82,21 @@
 
     </div>
   </header><!-- End Header -->
-
+  {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                        {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% endif %}
+  {% endwith %}
   <section class="section-a">
     <div class="container">
       <div>
         <h1>SMS DZ.</h1>
         <p>
-          un accompagnement plus qu’un service ! une satisfaction plus qu’une consolation !
+          un accompagnement plus qu'un service ! une satisfaction plus qu'une consolation !
         </p>
       </div>
       <img class="img-fluid" src={{ url_for('static', filename="assets/img/smsDzPhotos/smsDz1.svg")}}  alt="" />
@@ -101,7 +109,7 @@
         <h1>Intégration via API</h1>
         <p>
           Les APIs de SMS-DZ sont publiques et vous permettent
-          d’intégrer nos outils aux vôtres rapidement et en toute autonomie.
+          d'intégrer nos outils aux vôtres rapidement et en toute autonomie.
           Pour répondre à vos besoins spécifiques.</p>
           <ul>
             <li>ajouter des services SMS à votre environnement,
@@ -131,7 +139,7 @@
           INTERFACE WEB POUR VOS COMPAGNES MARKETING
           EXPÉDITEURS ALPHABÉTIQUES
           APIs REST POUR INTÉGRATIONS SYSTÈMES
-          JUSQU’À 180 000 SMS / HEURE        </p>
+          JUSQU'À 180 000 SMS / HEURE        </p>
       </div>
     </div>
   </section>
@@ -143,10 +151,10 @@
       <div>
         <h1>Envoi des SMS en masse (Bulk)</h1>
         <p>
-          Capacité d’envoi élevée (milliers d’SMS en une heure, centaine de millier par
-          jour) Envoi vers une Liste large de destinatairesEnvoi d’un messages multiples 
+          Capacité d'envoi élevée (milliers d'SMS en une heure, centaine de millier par
+          jour) Envoi vers une Liste large de destinatairesEnvoi d'un messages multiples 
           (nom, solde, date de payement…) Signature alphanumérique ( nom de la société ou numéro
-          court *) Définir une heure d'expiration.Planifiez l’envoi des SMS pour une date ultérieure.
+          court *) Définir une heure d'expiration.Planifiez l'envoi des SMS pour une date ultérieure.
         </p>
       </div>
       <img src={{ url_for('static', filename="assets/img/smsDzPhotos/smsDz3.svg")}}  width = 550 alt="" />
@@ -160,7 +168,7 @@
         <h1>Intégration via API</h1>
         <p>
           Les APIs de SMS-DZ sont publiques et vous permettent
-          d’intégrer nos outils aux vôtres rapidement et en toute autonomie.
+          d'intégrer nos outils aux vôtres rapidement et en toute autonomie.
           Pour répondre à vos besoins spécifiques.
         </p>
       </div>
