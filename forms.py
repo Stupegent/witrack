@@ -60,3 +60,8 @@ class MailGunForm(FlaskForm):
     receipient = SelectField('Receipient',choices=[('client','client'),('team','team')])
     submit = SubmitField('Submit')
 
+
+
+class newsLetterForm(FlaskForm):
+    email = EmailField('Email', validators=[DataRequired()])
+    submit = SubmitField("S'abonner")

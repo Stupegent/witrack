@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>WITRACK -home-</title>
+  <title>{{title}}</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -44,12 +44,12 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Accueil</a></li>
-          <li><a class="nav-link scrollto" href="#about">A propos</a></li>
-          <li class="dropdown"><a href="#solutions"><span>Solutions</span> <i class="bi bi-chevron-down"></i></a>
+          <li><a class="nav-link scrollto active" href="{{ '#hero' if request.endpoint =='Home' else '/#hero' }}">Accueil</a></li>
+          <li><a class="nav-link scrollto" href="{{ '#about' if request.endpoint =='Home' else '/#about' }}">A propos</a></li>
+          <li class="dropdown"><a href="{{ '#solutions' if request.endpoint =='Home' else '/#solutions' }}"><span>Solutions</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               
-              <li class="dropdown"><a href="#"><span>Witrack Solutions</span> <i class="bi bi-chevron-right"></i></a>
+              <li class="dropdown"><a href="{{url_for('witrack')}}"><span>Witrack Solutions</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="#">Witrack Maintenance</a></li>
                   <li><a href="#">Witrack troubleeticket</a></li>
@@ -60,8 +60,8 @@
               <li><a href="{{ url_for('smsDz' )}}">SMS DZ</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
+          <li><a class="nav-link scrollto" href="{{ '#services' if request.endpoint =='Home' else '/#services' }}">Services</a></li>
+          <li><a class="nav-link scrollto" href="{{ '#team' if request.endpoint =='Home' else '/#team' }}">Team</a></li>
           <!-- <li class="dropdown"><a href="#portfolio"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#portfolio">Drop Down 1</a></li>
@@ -80,8 +80,7 @@
             </ul>
           </li> -->
           
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          
+          <li><a class="nav-link scrollto" href="{{ '#contact' if request.endpoint =='Home' else '/#contact' }}#contact">Contact</a></li>
           <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -103,8 +102,29 @@
           <div class="col-lg-6">
             <h4>Rejoignez notre newsletter</h4>
             <p>Que pensez-vous de WITRACK?</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="S'abonner">
+            <form action="{{ url_for('newsletter')}}" method="POST">
+              {{ newsForm.hidden_tag() }}
+              {% if newsForm.email.errors %}
+                          {{ newsForm.email(class="newsForm-control is-invalid" , placeholder="Your E-mail." ) }}
+                        <div class="invalid-feedback">
+                            {% for error in newsForm.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+              {% else %}
+                  {{ newsForm.email(class="newsForm-control" , placeholder="Your E-mail." ) }}
+              {% endif %}
+              {% if newsForm.submit.errors %}
+                          {{ newsForm.submit(class="newsForm-control is-invalid" ) }}
+                        <div class="invalid-feedback">
+                            {% for error in newsForm.submit.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+              {% else %}
+                  {{ newsForm.submit(class="newsForm-control") }}
+              {% endif %}
+              
             </form>
           </div>
         </div>

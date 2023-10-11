@@ -11,6 +11,7 @@ from datetime import datetime
 
 
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676df8o#5(z^p@kjakwtw-'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///netfer.db'
@@ -18,9 +19,11 @@ db = SQLAlchemy(app)
 migrate = Migrate(app,db)
 
 
+
 login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.init_app(app)
+
 
 
 
@@ -83,6 +86,11 @@ class Contact(db.Model):
     message = db.Column(db.Text, nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
+class newsLetter(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100), nullable=False)
+
+
 
 
 
@@ -92,6 +100,8 @@ class Contact(db.Model):
 def Home():
     teammems = TeamMember.query.all()
     form = ContactForm()
+    newsForm = newsLetterForm()
+    title = "Home"
     if form.validate_on_submit():
         name = form.name.data
         email = form.email.data
@@ -100,22 +110,38 @@ def Home():
         contact = Contact(name=name,email=email,subject=subject,message=message)
         send_email(subject=subject,email=email,message=message)
         
-    return render_template('home.html',teammems = teammems,form=form,current_user=current_user)
-
-
+    return render_template('home.html',teammems = teammems,form=form,current_user=current_user,newsForm = newsForm,title = title)
 
 
 
 @app.route("/witrack/")
 def witrack():
-    return render_template("witrackPlatform.html")
+    title = "WITRACK"
+    newsForm = newsLetterForm()
+    return render_template("witrackPlatform.html",newsForm = newsForm,title = title)
 
 
 
 
 @app.route("/smsdz/")
 def smsDz():
-    return render_template("smsDz.html")
+    title = "smsDz"
+    newsForm = newsLetterForm()
+    return render_template("smsDz.html",newsForm = newsForm,title = title)
+
+
+
+@app.route("/newsletter/" , methods= ['POST'])
+@login_required
+def newsletter():
+    form = newsLetterForm()
+    if form.validate_on_submit():
+        email = form.email.data
+        nl = newsLetter(email= email)
+        db.session.add(nl)
+        db.session.commit
+        flash(" Welcome in our News Letter ",'success')
+        return redirect(url_for('Home'))
 
 
 
@@ -123,21 +149,23 @@ def smsDz():
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    print(request.endpoint)
-    print(form.validate_on_submit())
-    print(form.username.data, form.password.data)
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        print("saalam")
-        if user and check_password_hash(user.password, form.password.data):
-            login_user(user)
-            print("saalam2")
-            flash('Logged in successfully.', 'success')
-            return redirect(url_for('dashboard'))
-        else:
-            print("saalam3")
-            flash('Login failed. Please check your username and password.', 'danger')
-    return render_template('login.html', form=form)
+    newsForm = newsLetterForm()
+    if not current_user.is_authenticated: 
+        if form.validate_on_submit():
+            user = User.query.filter_by(username=form.username.data).first()
+            if user and check_password_hash(user.password, form.password.data):
+                login_user(user)
+                print("saalam2")
+                flash('Logged in successfully.', 'success')
+                return redirect(url_for('dashboard'))
+            else:
+                print("saalam3")
+                flash('Login failed. Please check your username and password.', 'danger')
+        return render_template('login.html', form=form, newsForm= newsForm)
+    else: 
+        flash('you are already connected!!', 'warning')
+        return redirect(url_for('smsDz'))
+
 
 
 @app.route('/team/', methods = ["GET","POST"])
@@ -184,12 +212,8 @@ def dashboard():
         db.session.commit()
         flash('Client created successfully', 'success')
         return redirect(url_for('smsDz'))
-    
-
-    
 
     return render_template('dashboard/formsDashboard.html',form=form,form2=form2,formSolution=formSolution,formQA=formQA )
-
 
 
 @app.route('/mailGun/', methods = ["GET","POST"])
@@ -265,7 +289,9 @@ def clienttab():
     solutions = Solution.query.all()
     QandA = Question.query.all()
     contacts = Contact.query.all()
-    return render_template('dashboard/clientsTable.html',clients = clients,team = team,solutions= solutions,QandA=QandA,contacts=contacts)
+    nls = newsLetter.query.all()
+    print('hello',nls)
+    return render_template('dashboard/clientsTable.html',clients = clients,team = team,solutions= solutions,QandA=QandA,contacts=contacts,nls=nls)
 
 
 
@@ -308,7 +334,7 @@ def send_emails():
 @login_required
 def logout():
     logout_user()
-    flash('Logged out successfully.', 'success')
+    flash('Logged out successfully.', 'sccess')
     return redirect(url_for('login'))
 
 

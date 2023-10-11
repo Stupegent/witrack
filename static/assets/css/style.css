@@ -3,13 +3,19 @@
 # General
 --------------------------------------------------------------*/
 
+
 /* $bg-color: #111116;
 $radius: 40px;
 $border: 4px;
 $circle1-color: #FFFFFF;
  */
 
+/* these are colors vaiable   */
 
+:root{
+  --mainColor:  #196568;
+
+}
 
 
 
@@ -19,7 +25,7 @@ $circle1-color: #FFFFFF;
 
 .section-a {
   margin: 0rem 0;
-  background:rgb(213, 222, 220)
+  background:rgb(208, 208, 208)
   /* background-image: linear-gradient(135deg, rgb(233, 233, 233) 40%, rgb(131, 131, 131) 100%); */
 }
 
@@ -66,7 +72,7 @@ $circle1-color: #FFFFFF;
 
 .section-d h1 {
   font-size: 4rem;
-  color: #196568;
+  color: var(--mainColor);
 }
 
 .section-d p {
@@ -131,7 +137,7 @@ $circle1-color: #FFFFFF;
 
 .section-c h1 {
   font-size: 4rem;
-  color: #196568;
+  color: var(--mainColor);
 }
 
 .section-c p {
@@ -259,7 +265,7 @@ h6 {
   bottom: 0;
   z-index: 9999;
   overflow: hidden;
-  background: #196568;
+  background: var(--mainColor);
 }
 
 #preloader:before {
@@ -267,7 +273,7 @@ h6 {
   position: fixed;
   top: calc(50% - 30px);
   left: calc(50% - 30px);
-  border: 6px solid #196568;
+  border: 6px solid var(--mainColor);
   border-top-color: #fff;
   border-bottom-color: #fff;
   border-radius: 50%;
@@ -546,7 +552,7 @@ h6 {
 .navbar-mobile a:focus {
   padding: 10px 20px;
   font-size: 15px;
-  color: #196568;
+  color: var(--mainColor);
 }
 
 .navbar-mobile a:hover,
@@ -558,7 +564,7 @@ h6 {
 .navbar-mobile .getstarted,
 .navbar-mobile .getstarted:focus {
   margin: 15px;
-  color: #196568;
+  color: var(--mainColor);
 }
 
 .navbar-mobile .dropdown ul {
@@ -602,7 +608,7 @@ h6 {
 #hero {
   width: 100%;
   height: 80vh;
-  background: #196568;
+  background: var(--mainColor);
 }
 
 #hero .container {
@@ -837,7 +843,7 @@ section {
   margin-bottom: 20px;
   padding-bottom: 20px;
   position: relative;
-  color: #196568;
+  color: var(--mainColor);
 }
 
 .section-title h2::before {
@@ -960,7 +966,7 @@ section {
 .why-us .content h3 {
   font-weight: 400;
   font-size: 34px;
-  color: #196568;
+  color: var(--mainColor);
 }
 
 .why-us .content h4 {
@@ -1085,7 +1091,7 @@ section {
 .skills .content h3 {
   font-weight: 700;
   font-size: 32px;
-  color: #196568;
+  color: var(--mainColor);
   font-family: "Poppins", sans-serif;
 }
 
@@ -1122,7 +1128,7 @@ section {
   display: block;
   font-weight: 600;
   font-family: "Poppins", sans-serif;
-  color: #196568;
+  color: var(--mainColor);
 }
 
 .skills .progress .skill .val {
@@ -1169,7 +1175,7 @@ section {
 }
 
 .services .icon-box h4 a {
-  color: #196568;
+  color: var(--mainColor);
   transition: ease-in-out 0.3s;
 }
 
@@ -1432,7 +1438,7 @@ section {
   font-weight: 700;
   margin-bottom: 5px;
   font-size: 20px;
-  color: #196568;
+  color: var(--mainColor);
 }
 
 .team .member span {
@@ -1478,7 +1484,7 @@ section {
 }
 
 .team .member .social a i {
-  color: #196568;
+  color: var(--mainColor);
   font-size: 16px;
   margin: 0 2px;
 }
@@ -1515,12 +1521,12 @@ section {
   font-weight: 500;
   margin-bottom: 15px;
   font-size: 20px;
-  color: #196568;
+  color: var(--mainColor);
 }
 
 .pricing h4 {
   font-size: 48px;
-  color: #196568;
+  color: var(--mainColor);
   font-weight: 400;
   font-family: "Jost", sans-serif;
   margin-bottom: 25px;
@@ -1682,7 +1688,7 @@ section {
 }
 
 .faq .faq-list a.collapsed {
-  color: #196568;
+  color: var(--mainColor);
   transition: 0.3s;
 }
 
@@ -1735,7 +1741,7 @@ section {
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 5px;
-  color: #196568;
+  color: var(--mainColor);
 }
 
 .contact .info p {
@@ -1932,7 +1938,7 @@ section {
 .breadcrumbs ol li+li::before {
   display: inline-block;
   padding-right: 10px;
-  color: #196568;
+  color: var(--mainColor);
   content: "/";
 }
 
@@ -1941,7 +1947,7 @@ section {
 --------------------------------------------------------------*/
 #footer {
   font-size: 14px;
-  background: #196568;
+  background: var(--mainColor);
 }
 
 #footer .footer-newsletter {
@@ -1949,7 +1955,7 @@ section {
   background: #f3f5fa;
   text-align: center;
   font-size: 15px;
-  color: #196568;
+  color: var(--mainColor);
 }
 
 #footer .footer-newsletter h4 {
@@ -1958,7 +1964,7 @@ section {
   padding: 0;
   line-height: 1;
   font-weight: 600;
-  color: #196568;
+  color: var(--mainColor);
 }
 
 #footer .footer-newsletter form {
@@ -2013,7 +2019,7 @@ section {
   line-height: 1;
   text-transform: uppercase;
   font-weight: 600;
-  color: #196568;
+  color: var(--mainColor);
 }
 
 #footer .footer-top .footer-contact p {
@@ -2027,7 +2033,7 @@ section {
 #footer .footer-top h4 {
   font-size: 16px;
   font-weight: bold;
-  color: #196568;
+  color: var(--mainColor);
   position: relative;
   padding-bottom: 12px;
 }
@@ -2206,7 +2212,7 @@ body {
     box-shadow: none;
     width: 100%;
     height: 40px;
-    background-color: #196568;
+    background-color: var(--mainColor);
     color: #fff;
     border-radius: 25px;
     box-shadow: 3px 3px 3px #b1b1b1,

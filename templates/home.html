@@ -5,6 +5,17 @@
 
     <div class="container">
       <div class="row">
+        <div>
+          {% with messages = get_flashed_messages(with_categories=true) %}
+                          {% if messages %}
+                          {% for category, message in messages %}
+                              <div class="alert alert-{{ category }}">
+                                  {{ message }}
+                              </div>
+                          {% endfor %}
+                          {% endif %}
+        {% endwith %}
+        </div>
         <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
           <h1>WITRACK est Votre Partenaire IT</h1>
           <h2>nous trouvons pour vous la solution smart qui vous convient</h2>
