@@ -33,13 +33,16 @@ $circle1-color: #FFFFFF;
   
 }
 
-.section-a .container {
+
+
+.section-a .container{
   display: grid;
   grid-template-columns: 1.5fr 2.5fr;
   grid-gap: 3rem;
   align-items: center;
   justify-content: center;
 }
+
 
 .section-a h1 {
   font-size: 5rem;
